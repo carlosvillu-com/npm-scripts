@@ -16,7 +16,10 @@
     "watch:javascript": "watchify -t babelify src/javascript/index.js -o dist/js/bundle.js",
     "watch:styles": "nodemon --watch src/style -e scss --exec node-sass src/style/index.scss dist/css/bundle.css --include-path=\"./node_modules/foundation-sites/scss/\"",
     "watch:html": "nodemon --watch src/ -e html --exec cp src/index.html dist/index.html",
-    "serve": "serve dist/ -p 8080"
+    "serve": "serve dist/ -p 8080",
+
+    "publish": "gh-pages -d dist"
+
   },
   "author": "Carlos Villuendas <carlosvillu@gmail.com>",
   "license": "ISC",
@@ -28,6 +31,7 @@
     "browserify": "11.2.0",
     "concurrently": "0.1.1",
     "foundation-sites": "5.5.3",
+    "gh-pages": "0.4.0",
     "node-sass": "3.3.3",
     "rimraf": "2.4.3",
     "serve": "1.4.0",
