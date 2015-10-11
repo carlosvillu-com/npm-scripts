@@ -1,0 +1,39 @@
+{
+  "name": "npm-scripts",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "clean": "rimraf dist/",
+
+    "predist": "npm run clean && mkdir -p dist/js && touch dist/js/bundle.js",
+    "dist": "npm run dist:javascript && npm run dist:styles && npm run dist:html",
+    "dist:javascript": "browserify -t babelify src/javascript/index.js -o dist/js/bundle.js",
+    "dist:styles": "node-sass src/style/index.scss dist/css/bundle.css --include-path=\"./node_modules/foundation-sites/scss/\"",
+    "dist:html": "cp src/index.html dist/index.html",
+
+    "watch": "concurrent --kill-others \"npm run watch:javascript\" \"npm run watch:styles\" \"npm run watch:html\" \"npm run serve\"",
+    "watch:javascript": "watchify -t babelify src/javascript/index.js -o dist/js/bundle.js",
+    "watch:styles": "nodemon --watch src/style -e scss --exec node-sass src/style/index.scss dist/css/bundle.css --include-path=\"./node_modules/foundation-sites/scss/\"",
+    "watch:html": "nodemon --watch src/ -e html --exec cp src/index.html dist/index.html",
+    "serve": "serve dist/ -p 8080"
+  },
+  "author": "Carlos Villuendas <carlosvillu@gmail.com>",
+  "license": "ISC",
+  "babel": {
+    "stage": "0"
+  },
+  "devDependencies": {
+    "babelify": "6.3.0",
+    "browserify": "11.2.0",
+    "concurrently": "0.1.1",
+    "foundation-sites": "5.5.3",
+    "node-sass": "3.3.3",
+    "rimraf": "2.4.3",
+    "serve": "1.4.0",
+    "watchify": "3.4.0"
+  },
+  "dependencies": {
+    "babel": "5.8.23"
+  }
+}
