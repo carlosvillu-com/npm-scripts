@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "clean": "rimraf dist/",
+    "clean": "rimraf dist && mkdir dist/ && echo \"*\n!.gitignore\" > dist/.gitignore",
 
     "predist": "npm run clean && mkdir -p dist/js && touch dist/js/bundle.js",
     "dist": "npm run dist:javascript && npm run dist:styles && npm run dist:html",
@@ -17,8 +17,11 @@
     "watch:javascript": "watchify -t babelify src/javascript/index.js -o dist/js/bundle.js",
     "watch:styles": "nodemon --watch src/style -e scss --exec node-sass src/style/index.scss dist/css/bundle.css --include-path=\"./node_modules/foundation-sites/scss/\"",
     "watch:html": "nodemon --watch src/ -e html --exec cp src/index.html dist/index.html",
+
     "serve": "serve dist/ -p 8080",
+
     "publish": "gh-pages -d dist",
+
     "start": "npm run dist && npm run serve"
   },
   "author": "Carlos Villuendas <carlosvillu@gmail.com>",
