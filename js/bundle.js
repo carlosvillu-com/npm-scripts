@@ -4734,7 +4734,7 @@ var User = (function () {
   _createClass(User, null, [{
     key: 'new',
     value: function _new() {
-      return fetch('https://randomuser.me/api').then(function (response) {
+      return fetch('https://cors-anywhere.herokuapp.com/https://randomuser.me/api').then(function (response) {
         return response.json();
       }).then(function (response) {
         return new User(response.results[0].user);
