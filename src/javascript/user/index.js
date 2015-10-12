@@ -1,6 +1,6 @@
 export default class User {
   static new(){
-    return fetch('https://randomuser.me/api')
+    return fetch('https://cors-anywhere.herokuapp.com/https://randomuser.me/api')
     .then(response => response.json())
     .then(response => new User(response.results[0].user))
   }
