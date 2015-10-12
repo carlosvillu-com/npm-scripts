@@ -1,3 +1,4 @@
+import "whatwg-fetch";
 import "babel/polyfill";
 import User from './user';
 

@@ -13,15 +13,13 @@
     "dist:html": "cp src/index.html dist/index.html",
 
     "watch": "concurrent --kill-others \"npm run watch:javascript\" \"npm run watch:styles\" \"npm run watch:html\" \"npm run serve\"",
+    "prewatch:javascript": "mkdir -p dist/js && touch dist/js/bundle.js",
     "watch:javascript": "watchify -t babelify src/javascript/index.js -o dist/js/bundle.js",
     "watch:styles": "nodemon --watch src/style -e scss --exec node-sass src/style/index.scss dist/css/bundle.css --include-path=\"./node_modules/foundation-sites/scss/\"",
     "watch:html": "nodemon --watch src/ -e html --exec cp src/index.html dist/index.html",
     "serve": "serve dist/ -p 8080",
-
     "publish": "gh-pages -d dist",
-    
     "start": "npm run dist && npm run serve"
-
   },
   "author": "Carlos Villuendas <carlosvillu@gmail.com>",
   "license": "ISC",
@@ -40,6 +38,7 @@
     "watchify": "3.4.0"
   },
   "dependencies": {
-    "babel": "5.8.23"
+    "babel": "5.8.23",
+    "whatwg-fetch": "0.9.0"
   }
 }
