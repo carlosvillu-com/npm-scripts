@@ -4,16 +4,16 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "clean": "rimraf dist && mkdir dist/ && echo \"*\n!.gitignore\" > dist/.gitignore",
+    "clean": "rimraf dist && mkdir -p dist/{js,css} && echo \"*\n!.gitignore\" > dist/.gitignore",
 
-    "predist": "npm run clean && mkdir -p dist/js && touch dist/js/bundle.js",
+    "predist": "npm run clean && touch dist/js/bundle.js",
     "dist": "npm run dist:javascript && npm run dist:styles && npm run dist:html",
     "dist:javascript": "browserify -t babelify src/javascript/index.js -o dist/js/bundle.js",
     "dist:styles": "node-sass src/style/index.scss dist/css/bundle.css --include-path=\"./node_modules/foundation-sites/scss/\"",
     "dist:html": "cp src/index.html dist/index.html",
 
+    "prewatch": "npm run clean && touch dist/js/bundle.js",
     "watch": "concurrent --kill-others \"npm run watch:javascript\" \"npm run watch:styles\" \"npm run watch:html\" \"npm run serve\"",
-    "prewatch:javascript": "mkdir -p dist/js && touch dist/js/bundle.js",
     "watch:javascript": "watchify -t babelify src/javascript/index.js -o dist/js/bundle.js",
     "watch:styles": "nodemon --watch src/style -e scss --exec node-sass src/style/index.scss dist/css/bundle.css --include-path=\"./node_modules/foundation-sites/scss/\"",
     "watch:html": "nodemon --watch src/ -e html --exec cp src/index.html dist/index.html",
